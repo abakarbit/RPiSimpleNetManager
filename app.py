@@ -253,4 +253,4 @@ def api_set_network():
 
 if __name__ == '__main__':
     # Host 0.0.0.0 agar bisa diakses dari device lain via Hotspot
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=80, debug=False)
