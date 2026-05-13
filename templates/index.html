@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RPi Network Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='all.min.css') }}">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="navbar-brand">
             <i class="fas fa-network-wired"></i>
-            <span>RPi NetManager</span>
+            <span>HSL-SynLite NetManager</span>
         </div>
         <div class="navbar-status">
             <span class="status-dot" id="globalStatusDot"></span>
@@ -54,8 +54,8 @@
                     <i class="fas fa-arrows-left-right"></i>
                 </div>
                 <div class="topo-node topo-center">
-                    <i class="fas fa-raspberry-pi fa-brands"></i>
-                    <span>Raspberry Pi</span>
+                    <i class="fas fa-solid fa-globe"></i>
+                    <span>HSL</span>
                     <small>wlan0 ↔ eth0</small>
                 </div>
                 <div class="topo-arrow">
