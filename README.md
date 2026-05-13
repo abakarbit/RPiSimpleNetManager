@@ -7,10 +7,10 @@ Web interface untuk konfigurasi jaringan LAN Raspberry Pi, diakses melalui hotsp
 ## Arsitektur Jaringan
 
 ```
-┌──────────────────┐        Wi-Fi (AP)        ┌──────────────────────────────────────┐
-│  Laptop / HP     │ ◄──────────────────────► │         Raspberry Pi                 │
-│  (browser)       │   SSID: RaspiConfig       │  wlan0  ←→  [Web App :5000]  ←→ eth0│
-└──────────────────┘   IP: 192.168.4.x         └──────────────────────────────────────┘
+┌──────────────────┐        Wi-Fi (AP)        ┌─────────────────────────────────────┐
+│  Laptop / HP     │ ◄──────────────────────► │         Raspberry Pi                │
+│  (browser)       │   SSID: RaspiConfig      │  wlan0  ←→  [  Web App    ]  ←→ eth0│
+└──────────────────┘   IP: 192.168.4.x        └─────────────────────────────────────┘
                                                                                │
                                                                                │ Kabel LAN
                                                                                ▼
@@ -23,7 +23,7 @@ Web interface untuk konfigurasi jaringan LAN Raspberry Pi, diakses melalui hotsp
 **Alur kerja:**
 1. Raspberry Pi membuat hotspot Wi-Fi (`wlan0` → mode Access Point)
 2. User menyambungkan perangkat (laptop/HP) ke hotspot tersebut
-3. User membuka browser → `http://192.168.4.1:5000`
+3. User membuka browser → `http://192.168.4.1`
 4. Melalui web interface, user mengkonfigurasi interface LAN (`eth0`)
 5. Raspberry Pi menerapkan perubahan ke NetworkManager
 
@@ -119,7 +119,7 @@ HOTSPOT_CONNECTION_NAME = "Hotspot"               # <-- sesuaikan
 ## Tahap 4 — Install Dependensi Python
 
 ```bash
-cd /home/pi/raspi_simpel_network_manager
+cd /home/pi/RPiSimpleNetManager
 
 # Buat virtual environment (opsional tapi dianjurkan)
 python3 -m venv venv
@@ -140,12 +140,12 @@ sudo python3 app.py
 
 Atau dengan virtual environment:
 ```bash
-sudo /home/pi/raspi_simpel_network_manager/venv/bin/python app.py
+sudo /home/pi/RPiSimpleNetManager/venv/bin/python app.py
 ```
 
 Buka browser dari perangkat yang terhubung ke hotspot:
 ```
-http://192.168.4.1:5000
+http://192.168.4.1
 ```
 
 ---
@@ -171,8 +171,8 @@ Wants=NetworkManager.service
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/home/pi/raspi_simpel_network_manager
-ExecStart=/home/pi/raspi_simpel_network_manager/venv/bin/python app.py
+WorkingDirectory=/home/pi/RPiSimpleNetManager
+ExecStart=/home/pi/RPiSimpleNetManager/venv/bin/python app.py
 Restart=on-failure
 RestartSec=5
 StandardOutput=journal
@@ -273,7 +273,7 @@ sudo nmcli connection down "Hotspot" && sudo nmcli connection up "Hotspot"
 ## Struktur Proyek
 
 ```
-raspi_simpel_network_manager/
+RPiSimpleNetManager/
 ├── app.py              # Backend Flask (API + routing)
 ├── templates/
 │   └── index.html      # UI utama (3 tab: Ikhtisar, Konfigurasi, Sistem)
